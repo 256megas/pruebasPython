@@ -1,0 +1,1 @@
+print (max("casa","animal","coche","avion"))
