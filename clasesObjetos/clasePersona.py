@@ -2,41 +2,35 @@ from datetime import datetime
 
 
 class Persona:
-    nombre: str
-    edad: int
-    altura: float
-    peso: float
-    genero: str
-    caminando: bool
 
     def __init__(self, nombre, edad, altura, peso, genero):
-        self.nombre = nombre
-        self.edad = edad
-        self.altura = altura
-        self.peso = peso
-        self.genero = genero
-        self.caminando = False
+        self.__nombre = nombre
+        self.__edad = edad
+        self.__altura = altura
+        self.__peso = peso
+        self.__genero = genero
+        self.__caminando = False
 
     def toString(self):
-        print("Nombre: ", self.nombre)
-        print("Edod: ", self.edad)
-        print("Altura: ", self.altura)
-        print("Peso: ", self.peso)
-        print("Genero: ", self.genero)
-        if (self.caminando):
+        print("Nombre: ", self.__nombre)
+        print("Edod:   ", self.__edad)
+        print("Altura: ", self.__altura)
+        print("Peso:   ", self.__peso)
+        print("Genero: ", self.__genero)
+        if (self.__caminando):
             print("Esta caminando")
         else:
             print("Esta quieto")
-        print("IMC: ", self.imc())
+        print("IMC:    ", self.imc())
 
     def imc(self):
-        return (round(self.peso/(self.altura**2), 2))
+        return (round(self.__peso/(self.__altura**2), 2))
 
     def andar(self):
-        self.caminando = True
+        self.__caminando = True
 
     def parar(self):
-        self.caminando = False
+        self.__caminando = False
 
     @classmethod
     def calcularEdad(cls, ano):
@@ -44,8 +38,21 @@ class Persona:
         print(f"Si naciste en el año {ano} tienes {anoActual-ano}")
 
 
-persona = Persona("Flipendo", 30, 1.80, 70.4, "hombre")
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, altura, peso, genero, tiempoEstudioDiario):
+        super().__init__(nombre, edad, altura, peso, genero)
+        self.__tiempoEstudioDiario = tiempoEstudioDiario
+
+    def toString(self):
+        super().toString()
+        print("Estudia:", self.__tiempoEstudioDiario)
+
+
+persona = Persona("Mortadelo", 38, 1.80, 100.4, "hombre")
 
 persona.toString()
 
 Persona.calcularEdad(1986)
+print("*******************************************")
+estudiante = Estudiante("Filemona", 35, 1.65, 65.4, "mujer", 180)
+estudiante.toString()
